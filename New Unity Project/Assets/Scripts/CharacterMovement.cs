@@ -1,19 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
 
 public class CharacterMovement : MonoBehaviour {
 
     public float MoveSpeed = 5f;
-    public KeyCode MoveForward = KeyCode.W;
-    public KeyCode MoveBackward = KeyCode.S;
-    public KeyCode MoveRight = KeyCode.D;
-    public KeyCode MoveLeft = KeyCode.A;
-    public KeyCode MoveForward1 = KeyCode.UpArrow;
-    public KeyCode MoveBackward1 = KeyCode.DownArrow;
-    public KeyCode MoveRight1 = KeyCode.RightArrow;
-    public KeyCode MoveLeft1 = KeyCode.LeftArrow;
-    public KeyCode Jump = KeyCode.Space;
-    public KeyCode Crouch = KeyCode.LeftControl;
+    public Control MoveForward;
+    public Control MoveBackward;
+    public Control MoveRight;
+    public Control MoveLeft;
+    public Control Jump;
+    public Control Crouch;
 	// Use this for initialization
 	void Start () {
 	
@@ -21,21 +19,18 @@ public class CharacterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(MoveForward) || Input.GetKey(MoveForward1))
+        if (MoveForward.IsActive)
             transform.Translate(transform.forward * (MoveSpeed * Time.deltaTime));
-        else
-            if (Input.GetKey(MoveBackward) || Input.GetKey(MoveBackward1))
-                transform.Translate(transform.forward * (MoveSpeed * Time.deltaTime * -1));
-        if (Input.GetKey(MoveRight) || Input.GetKey(MoveRight1))
+        if (MoveBackward.IsActive)
+            transform.Translate(transform.forward * (MoveSpeed * Time.deltaTime * -1));
+        if (MoveRight.IsActive)
             transform.Translate(transform.right * (MoveSpeed * Time.deltaTime));
-        else
-            if (Input.GetKey(MoveLeft) || Input.GetKey(MoveLeft1))
-                transform.Translate(transform.right * (MoveSpeed * Time.deltaTime * -1));
-        if (Input.GetKey(Jump))
+        if (MoveLeft.IsActive)
+            transform.Translate(transform.right * (MoveSpeed * Time.deltaTime * -1));
+        if (Jump.IsActive)
             transform.Translate(transform.up * (MoveSpeed * Time.deltaTime));
-        else
-            if (Input.GetKey(Crouch))
-                transform.Translate(transform.up * (MoveSpeed * Time.deltaTime * -1));
+        if (Crouch.IsActive)
+            transform.Translate(transform.up * (MoveSpeed * Time.deltaTime * -1));
        
 	}
 }
